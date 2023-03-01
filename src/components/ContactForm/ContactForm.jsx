@@ -1,16 +1,17 @@
 /* eslint-disable no-unreachable */
 import React from 'react';
-import { addUser } from 'redux/slice';
+import { addContacts } from 'redux/operations';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVisibleUsers } from '../../redux/selectors';
-import { nanoid } from 'nanoid';
+import { selectContacts } from '../../redux/selectors';
+
 import css from './ContactForm.module.css';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(getVisibleUsers);
+
+  const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
 
@@ -27,7 +28,7 @@ export default function ContactForm() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const newContact = { id: nanoid(), name, number };
+    const newContact = { name, number };
 
     if (checkContactExist(name, number)) {
       alert(
@@ -35,7 +36,7 @@ export default function ContactForm() {
       );
       return;
     }
-    dispatch(addUser(newContact));
+    dispatch(addContacts(newContact));
     handleReset();
   };
 

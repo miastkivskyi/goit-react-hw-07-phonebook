@@ -1,10 +1,18 @@
-export const getUsers = state => state.user;
+import { createSelector } from '@reduxjs/toolkit';
 
-export const getUsersFilter = state => state.filter;
+export const selectContacts = state => state.contacts.items;
+export const selectFilter = state => state.filter;
 
-export const getVisibleUsers = state => {
-  const filter = state.filter.toLowerCase();
-  return state.contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter)
-  );
-};
+export const selectIsLoading = state => state.contacts.isLoading;
+export const selectError = state => state.contacts.error;
+
+export const getVisibleUsers = createSelector(
+  [selectContacts, selectFilter],
+  (contacts, query) => {
+    const fiter = query
+      ? contacts.filter(contact => contact.name.toLowerCase().includes(query))
+      : contacts;
+
+    return fiter;
+  }
+);

@@ -1,12 +1,12 @@
 import { setFilter } from '../../redux/filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsersFilter } from '../../redux/selectors';
+import { selectFilter } from '../../redux/selectors';
 
 import css from './Filter.module.css';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getUsersFilter);
+  const filter = useSelector(selectFilter);
 
   const onFilterChange = query => {
     dispatch(setFilter(query.toLowerCase()));
