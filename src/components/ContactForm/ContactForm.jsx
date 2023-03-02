@@ -4,7 +4,7 @@ import { addContacts } from 'redux/operations';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from '../../redux/selectors';
-
+import { FaUser, FaPhone } from 'react-icons/fa';
 import css from './ContactForm.module.css';
 
 export default function ContactForm() {
@@ -48,8 +48,10 @@ export default function ContactForm() {
   return (
     <>
       <form onSubmit={handleSubmit} className={css.form}>
-        <label>
-          <h2 className={css.titleForm}>Name</h2>
+        <label className={css.label}>
+          <span className={css.icon}>
+            <FaUser />
+          </span>
           <input
             type="text"
             name="name"
@@ -59,11 +61,14 @@ export default function ContactForm() {
             value={name}
             onChange={event => setName(event.target.value)}
             className={css.inputForm}
+            placeholder="Name"
           />
         </label>
 
-        <label>
-          <h2 className={css.titleForm}>Number</h2>
+        <label className={css.label}>
+          <span className={css.icon}>
+            <FaPhone />
+          </span>
           <input
             type="tel"
             name="number"
@@ -73,6 +78,7 @@ export default function ContactForm() {
             value={number}
             onChange={event => setNumber(event.target.value)}
             className={css.inputForm}
+            placeholder="Number"
           />
         </label>
 

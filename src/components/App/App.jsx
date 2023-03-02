@@ -21,12 +21,15 @@ export default function App() {
 
   return (
     <>
-      <h1 className={css.title}>Phonebook</h1>
-      <ContactForm />
-      <Filter />
-      <h1 className={css.title}>Contacts</h1>
-      {isLoading && !error && <Loader />}
-      <ContactList />
+      <div className={css.header}>
+        <h1 className={css.title}>Phonebook</h1>
+      </div>
+      <div className={css.container}>
+        <ContactForm />
+        <Filter />
+        {isLoading && !error && <Loader />}
+        <ContactList />
+      </div>
     </>
   );
 }
